@@ -1,11 +1,7 @@
-# My Super Mario Java 2D Game
+# Super Mario 2D Java Clone
 
-This is a full screen 2D Java game like super mario with some basic creatures and maps.
+This is a Super Mario 2D Clone written in java.
 
-This game is implemented using the Java programming language, using the java graphics librieries.
+Originally forked from [Super-Mario-Java-2D-Game](https://github.com/mtala3t/Super-Mario-Java-2D-Game).
 
-The used IDE is netbeans (I uploaded all project artifacts), also the game JAR file is uploaded.
-
-This game is free to use and the code is available to anyone to learn from it without any restrictions.
-
-Please visit my website. http://www.mohamedtalaat.net/
+We're implementing a better gameplay and user experience as part of our Agile development school project.
