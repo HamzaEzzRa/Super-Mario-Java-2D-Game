@@ -33,8 +33,8 @@ public class GameEngine extends GameCore
     private GameAction moveRight;
     private GameAction jump;
     private GameAction exit;
-    private int collectedStars=0;
-    private int numLives=6;
+    private int collectedCoins = 0;
+    private int numLives = 6;
    
     public void init()
     {
@@ -104,13 +104,13 @@ public class GameEngine extends GameCore
     public void draw(Graphics2D g) {
         drawer.draw(g, map, screen.getWidth(), screen.getHeight());
         g.setColor(Color.WHITE);
-        g.drawString("Press ESC for EXIT.",10.0f,20.0f);
+        g.drawString("Press ESC for EXIT.", 10.0f, 20.0f);
         g.setColor(Color.GREEN);
-        g.drawString("Coins: "+collectedStars,300.0f,20.0f);
+        g.drawString("Coins: " + collectedCoins, 300.0f, 20.0f);
         g.setColor(Color.YELLOW);
-        g.drawString("Lives: "+(numLives),500.0f,20.0f );
+        g.drawString("Lives: " + (numLives), 500.0f, 20.0f);
         g.setColor(Color.WHITE);
-        g.drawString("Home: "+mapLoader.currentMap,700.0f,20.0f);
+        g.drawString("Home: " + mapLoader.currentMap, 700.0f, 20.0f);
     }
     
     /**
@@ -326,32 +326,35 @@ public class GameEngine extends GameCore
      */
     public void checkPlayerCollision(Player player,
             boolean canKill) {
-        if (!player.isAlive()) {
+        if (!player.isAlive())
             return;
-        }
         
         // check for player collision with other sprites
         Sprite collisionSprite = getSpriteCollision(player);
-        if (collisionSprite instanceof PowerUp) {
+        if (collisionSprite instanceof PowerUp)
             acquirePowerUp((PowerUp)collisionSprite);
-        } else if (collisionSprite instanceof Creature) {
+        else if (collisionSprite instanceof Creature) {
             Creature badguy = (Creature)collisionSprite;
-            if (canKill) {
+            if (canKill || player.getInvincible()) {
                 AudioManager.getInstance().play(AudioManager.SoundType.CREATURE_DEATH);
                 
                 // kill the badguy and make player bounce
                 badguy.setState(Creature.STATE_DYING);
-                player.setY(badguy.getY() - player.getHeight());
-                player.jump(true);
-            } else {
+                
+                if (canKill) {
+                    player.setY(badguy.getY() - player.getHeight());
+                    player.jump(true);
+                }
+            }
+            else {
                 // player dies!
                 player.setState(Creature.STATE_DYING);
                 numLives--;
-                if (numLives==0) {
+                if (numLives == 0) {
                     AudioManager.getInstance().stopAll();
                     AudioManager.getInstance().play(AudioManager.SoundType.GAME_OVER);
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(2500);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
                     }
@@ -363,7 +366,6 @@ public class GameEngine extends GameCore
         }
     }
     
-    
     /**
      * Gives the player the specified power up and removes it
      * from the map.
@@ -372,23 +374,29 @@ public class GameEngine extends GameCore
         // remove it from the map
         map.removeSprite(powerUp);
         
-        if (powerUp instanceof PowerUp.Star) {
-            // do something here, like give the player points
+        if (powerUp instanceof PowerUp.Coin) {
             AudioManager.getInstance().play(AudioManager.SoundType.COIN_PICKUP);
-            collectedStars++;
-            if(collectedStars==100) {
+            
+            collectedCoins++;
+            if (collectedCoins == 100) {
                 numLives++;
-                collectedStars=0;
+                collectedCoins=0;
             }
-        } else if (powerUp instanceof PowerUp.Music) {
-            AudioManager.getInstance().play(AudioManager.SoundType.STAR_PICKUP);            
-        } else if (powerUp instanceof PowerUp.Goal) {
+        }
+        else if (powerUp instanceof PowerUp.Star) {
+            AudioManager.getInstance().play(AudioManager.SoundType.STAR_PICKUP);
+            
+            Player player = (Player)map.getPlayer();
+            player.setInvincible(true);
+        }
+        else if (powerUp instanceof PowerUp.Goal) {
+            Player player = (Player)map.getPlayer();
+            player.setInvincible(false);
+            
             AudioManager.getInstance().play(AudioManager.SoundType.LEVEL_ADVANCE);
-
-            // Advance to next map
+            
+            // advance to next map
             map = mapLoader.loadNextMap();
         }
-    }
-    
-      
+    } 
 }

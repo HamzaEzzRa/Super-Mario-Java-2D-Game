@@ -1,12 +1,12 @@
-
-						                        		      
-I     IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-I                                       II                                               I
-I                               oooo         oooo                                        I
-I                               IIII         IIII                                        I
-I                        oooo          oo2o        oooo              oooo                I
-I                 ooo 2  IIII    2     IIII     2  IIII   oooo 2     IIII      2         I
-I           2     III      2             2         2      IIII      1      2     2       I
-I           II                      II     II                      II            II      I
-I     1     II     1    1     1     II  1  II   1  2   1        1     1       1        * I
-IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+D                                                                                        C
+D						                        		 C
+F     IBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBE
+D                                                                                        C
+D                               oooo         oooo                                        C
+D                               IBBJ         IBBJ                                        C
+D                        oooo          oo2o        oooo              oooo                C
+D                 ooo 2  IBBJ    2     IBBJ     2  IBBJ   oooo 2     IBBJ      2         C
+D           2     IBJ      2        !    2         2      IBBJ      1      2     2       C
+D           EBF                     EBF o o o o   2                IBJ           IBJ     C
+D     1     CAD    1    1     1     CAD 2 1 EBF  1  2   1       1     1       1        * C
+HBBBBBBBBBBBGAHBBBBBBBBBBBBBBBBBBBBBGAHBBBBBGAHBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBG

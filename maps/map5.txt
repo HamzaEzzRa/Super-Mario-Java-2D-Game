@@ -1,0 +1,11 @@
+
+BF                                                                                                      EB
+AD                                                                                             o        CA
+AD                                                                                            o o       CA
+AD                       o 1 o     o 2 o                                                     o o o      CA
+AD            1         IBBBBJ     IBBBJ       o  o        !o1                              o o o o     CA
+AD           IBJ                        2      IBBJ        IBJ          2   2   2                       CA
+AD                        2     2     2             2        2        2    2   2       2EBF             CA
+AD                      EBF                   EBF                       EBF           2EGAD             CA
+AD     1EBF             CAD     1      1   oo CAD o o 1  1  ooo  1 o 1  CAD           EGAAD  1  1     * CA
+AHBBBBBBGAHBBBJ       IBGAHBBBBBBBBBBBBBBBBBBBGAHBBBBBBBBBBBBBBBBBBBBBBBGAHBJ       IBGAAAHBBBBBBBBBBBBBGA

@@ -23,7 +23,7 @@ public class MapLoader
 
     // host sprites used for cloning
     private Sprite playerSprite;
-    private Sprite musicSprite;
+    private Sprite starSprite;
     private Sprite coinSprite;
     private Sprite goalSprite;
     private Sprite grubSprite;
@@ -172,7 +172,7 @@ public class MapLoader
                     addSprite(newMap, coinSprite, x, y);
                 }
                 else if (ch == '!') {
-                    addSprite(newMap, musicSprite, x, y);
+                    addSprite(newMap, starSprite, x, y);
                 }
                 else if (ch == '*') {
                     addSprite(newMap, goalSprite, x, y);
@@ -244,8 +244,6 @@ public class MapLoader
         }
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     public void loadCreatureSprites() 
     {
 
@@ -313,7 +311,6 @@ public class MapLoader
         return anim;
     }
 
-
     private Animation createGrubAnim(Image img1, Image img2)
     {
         Animation anim = new Animation();
@@ -322,31 +319,29 @@ public class MapLoader
         return anim;
     }
 
-
-    private void loadPowerUpSprites() 
-    {
+    private void loadPowerUpSprites() {
         // create "goal" sprite
         Animation anim = new Animation();
         anim.addFrame(loadImage("heart.png"), 150);
         goalSprite = new PowerUp.Goal(anim);
 
+        // create "coin" sprite
+        anim = new Animation();
+        anim.addFrame(loadImage("banana1.png"), 250);  
+        anim.addFrame(loadImage("banana2.png"), 250);
+        anim.addFrame(loadImage("banana3.png"), 250);
+        anim.addFrame(loadImage("banana4.png"), 250);
+        anim.addFrame(loadImage("banana5.png"), 250);
+        coinSprite = new PowerUp.Coin(anim);
+
         // create "star" sprite
         anim = new Animation();
-        anim.addFrame(loadImage("coin1.png"),250 ) ;  
-        anim.addFrame(loadImage("coin2.png"),250);
-        anim.addFrame(loadImage("coin3.png"),250);
-        anim.addFrame(loadImage("coin4.png"),250);
-        anim.addFrame(loadImage("coin5.png"),250);
-        coinSprite = new PowerUp.Star(anim);
-
-        // create "music" sprite
-        anim = new Animation();
-        anim.addFrame(loadImage("music1.png"), 150);
-        anim.addFrame(loadImage("music2.png"), 150);
-        anim.addFrame(loadImage("music3.png"), 150);
-        anim.addFrame(loadImage("music2.png"), 150);
-        musicSprite = new PowerUp.Music(anim);
-        musicSprite=new PowerUp.Music(anim);
+        anim.addFrame(loadImage("steak1.png"), 250);
+        anim.addFrame(loadImage("steak2.png"), 250);
+        anim.addFrame(loadImage("steak3.png"), 250);
+        anim.addFrame(loadImage("steak4.png"), 250);
+        anim.addFrame(loadImage("steak5.png"), 250);
+        starSprite = new PowerUp.Star(anim);
+        starSprite = new PowerUp.Star(anim);
     }
-
 }
