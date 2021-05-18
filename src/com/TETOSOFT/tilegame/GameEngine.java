@@ -22,6 +22,8 @@ public class GameEngine extends GameCore
     }
     
     public static final float GRAVITY = 0.002f;
+    // adding acceleration for a smooth mouvement 
+    public static final float ACCELERATION= 0.5f;
     
     private Point pointCache = new Point();
     private TileMap map;
@@ -89,10 +91,11 @@ public class GameEngine extends GameCore
         Player player = (Player)map.getPlayer();
         if (player.isAlive()) {
             float velocityX = 0;
-            if (moveLeft.isPressed())
-                velocityX -= player.getMaxSpeed();
-            if (moveRight.isPressed())
-                velocityX += player.getMaxSpeed();
+              //partie responsable du mouvement à gauche et à droite 
+            if (moveLeft.isPressed() && velocityX<player.getMaxSpeed())
+                velocityX -= ACCELERATION*elapsedTime;
+            if (moveRight.isPressed() && velocityX>-player.getMaxSpeed())
+                velocityX += ACCELERATION*elapsedTime;
             if (jump.isPressed())
                 player.jump(false);
             
