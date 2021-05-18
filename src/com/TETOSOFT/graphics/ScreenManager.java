@@ -10,28 +10,23 @@ public class ScreenManager
 {
     private GraphicsDevice device;
 
-   
     public ScreenManager() 
     {
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         device = environment.getDefaultScreenDevice();
     }
 
-
-    
     public DisplayMode[] getCompatibleDisplayModes() 
     {
         return device.getDisplayModes();
     }
-
-
    
     public DisplayMode findFirstCompatibleMode(DisplayMode modes[])
     {
         DisplayMode goodModes[] = device.getDisplayModes();
-        for (int i = 0; i < modes.length; i++) 
+        for (int i = modes.length - 1; i >= 0; i--) 
         {
-            for (int j = 0; j < goodModes.length; j++) 
+            for (int j = goodModes.length - 1; j >= 0 ; j--) 
             {
                 if (displayModesMatch(modes[i], goodModes[j])) 
                 {
@@ -42,7 +37,6 @@ public class ScreenManager
         return null;
     }
 
-    
     public DisplayMode getCurrentDisplayMode() 
     {
         return device.getDisplayMode();
@@ -73,7 +67,6 @@ public class ScreenManager
 
          return true;
     }
-
 
     public void setFullScreen(DisplayMode displayMode) 
     {
@@ -112,11 +105,8 @@ public class ScreenManager
         {
             // ignore
         }
-
-
     }
 
-    
     public Graphics2D getGraphics() 
     {
         Window window = device.getFullScreenWindow();
@@ -126,12 +116,9 @@ public class ScreenManager
             return (Graphics2D)strategy.getDrawGraphics();
         }
      
-           
         return null;
-        
     }
     
-   
     public void update() 
     {
         Window window = device.getFullScreenWindow();
@@ -147,13 +134,9 @@ public class ScreenManager
         Toolkit.getDefaultToolkit().sync();
     }
 
-
-
     public JFrame getFullScreenWindow() {
         return (JFrame)device.getFullScreenWindow();
     }
-
-
    
     public int getWidth() 
     {
@@ -167,8 +150,6 @@ public class ScreenManager
             return 0;
         }
     }
-
-
     
     public int getHeight() 
     {
@@ -182,8 +163,6 @@ public class ScreenManager
             return 0;
         }
     }
-
-
     
     public void restoreScreen() 
     {
@@ -194,7 +173,6 @@ public class ScreenManager
         }
         device.setFullScreenWindow(null);
     }
-
 
     public BufferedImage createCompatibleImage(int w, int h,
         int transparancy)

@@ -10,24 +10,21 @@ import com.TETOSOFT.graphics.ScreenManager;
     implement the draw() method.
 */
 public abstract class GameCore {
-
     protected static final int FONT_SIZE = 18;
 
     private static final DisplayMode POSSIBLE_MODES[] = {
-        new DisplayMode(800, 600, 32, 0),
+        new DisplayMode(640, 480, 8, 0),
+        new DisplayMode(640, 480, 16, 0),
+        new DisplayMode(640, 480, 24, 0),
+        new DisplayMode(640, 480, 32, 0),
+        new DisplayMode(800, 600, 8, 0),
         new DisplayMode(800, 600, 16, 0),
         new DisplayMode(800, 600, 24, 0),
-        new DisplayMode(640, 480, 16, 0),
-        new DisplayMode(640, 480, 32, 0),
-        new DisplayMode(640, 480, 24, 0),
-        new DisplayMode(1024, 768, 16, 0),
-        new DisplayMode(1024, 768, 32, 0),
-        new DisplayMode(1024, 768, 24, 0),
+        new DisplayMode(800, 600, 32, 0),
     };
 
     private boolean isRunning;
     protected ScreenManager screen;
-
 
     /**
         Signals the game loop that it's time to quit
@@ -35,7 +32,6 @@ public abstract class GameCore {
     public void stop() {
         isRunning = false;
     }
-
 
     /**
         Calls init() and gameLoop()
@@ -51,12 +47,11 @@ public abstract class GameCore {
         }
     }
 
-
     /**
         Exits the VM from a daemon thread. The daemon thread waits
         2 seconds then calls System.exit(0). Since the VM should
         exit when only daemon threads are running, this makes sure
-        System.exit(0) is only called if neccesary. It's neccesary
+        System.exit(0) is only called if necessary. It's necessary
         if the Java Sound system is running.
     */
     public void lazilyExit() {
@@ -75,7 +70,6 @@ public abstract class GameCore {
         thread.start();
     }
 
-
     /**
         Sets full screen mode and initiates and objects.
     */
@@ -84,6 +78,7 @@ public abstract class GameCore {
         screen = new ScreenManager();
         DisplayMode displayMode =
         screen.findFirstCompatibleMode(POSSIBLE_MODES);
+        System.out.println(displayMode);
         screen.setFullScreen(displayMode);
 
         Window window = screen.getFullScreenWindow();
@@ -94,11 +89,9 @@ public abstract class GameCore {
         isRunning = true;
     }
 
-
     public Image loadImage(String fileName) {
         return new ImageIcon(fileName).getImage();
     }
-
 
     /**
         Runs through the game loop until stop() is called.
@@ -129,7 +122,6 @@ public abstract class GameCore {
         }
     }
 
-
     /**
         Updates the state of the game/animation based on the
         amount of elapsed time that has passed.
@@ -137,7 +129,6 @@ public abstract class GameCore {
     public void update(long elapsedTime) {
         // do nothing
     }
-
 
     /**
         Draws to the screen. Subclasses must override this

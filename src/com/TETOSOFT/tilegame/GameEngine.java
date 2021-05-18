@@ -1,5 +1,6 @@
 package com.TETOSOFT.tilegame;
 
+import com.TETOSOFT.audio.AudioManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
@@ -51,15 +52,15 @@ public class GameEngine extends GameCore
         
         // load first map
         map = mapLoader.loadNextMap();
+        
+        AudioManager.getInstance().play(AudioManager.SoundType.BG_MUSIC);
     }
     
-    
     /**
-     * Closes any resurces used by the GameManager.
+     * Closes any resources used by the GameManager.
      */
     public void stop() {
         super.stop();
-        
     }
     
     
@@ -79,35 +80,28 @@ public class GameEngine extends GameCore
     }
     
     
-    private void checkInput(long elapsedTime) 
-    {
-        
+    private void checkInput(long elapsedTime) {
         if (exit.isPressed()) {
+            AudioManager.getInstance().stopAll();
             stop();
         }
         
         Player player = (Player)map.getPlayer();
-        if (player.isAlive()) 
-        {
+        if (player.isAlive()) {
             float velocityX = 0;
-            if (moveLeft.isPressed()) 
-            {
-                velocityX-=player.getMaxSpeed();
-            }
-            if (moveRight.isPressed()) {
-                velocityX+=player.getMaxSpeed();
-            }
-            if (jump.isPressed()) {
+            if (moveLeft.isPressed())
+                velocityX -= player.getMaxSpeed();
+            if (moveRight.isPressed())
+                velocityX += player.getMaxSpeed();
+            if (jump.isPressed())
                 player.jump(false);
-            }
+            
             player.setVelocityX(velocityX);
-        }
-        
+        }    
     }
     
     
     public void draw(Graphics2D g) {
-        
         drawer.draw(g, map, screen.getWidth(), screen.getHeight());
         g.setColor(Color.WHITE);
         g.drawString("Press ESC for EXIT.",10.0f,20.0f);
@@ -117,9 +111,7 @@ public class GameEngine extends GameCore
         g.drawString("Lives: "+(numLives),500.0f,20.0f );
         g.setColor(Color.WHITE);
         g.drawString("Home: "+mapLoader.currentMap,700.0f,20.0f);
-        
     }
-    
     
     /**
      * Gets the current map.
@@ -133,8 +125,7 @@ public class GameEngine extends GameCore
      * Sprite's X or Y should be changed, not both. Returns null
      * if no collision is detected.
      */
-    public Point getTileCollision(Sprite sprite, float newX, float newY) 
-    {
+    public Point getTileCollision(Sprite sprite, float newX, float newY) {
         float fromX = Math.min(sprite.getX(), newX);
         float fromY = Math.min(sprite.getY(), newY);
         float toX = Math.max(sprite.getX(), newX);
@@ -226,6 +217,12 @@ public class GameEngine extends GameCore
     public void update(long elapsedTime) {
         Creature player = (Creature)map.getPlayer();
         
+        // player fallen
+        if (player.getY() > screen.getHeight() + player.getHeight() * 2) {
+            player.setState(Creature.STATE_DEAD);
+            numLives--;
+            AudioManager.getInstance().play(AudioManager.SoundType.PLAYER_DEATH);
+        }
         
         // player is dead! start map over
         if (player.getState() == Creature.STATE_DEAD) {
@@ -340,6 +337,8 @@ public class GameEngine extends GameCore
         } else if (collisionSprite instanceof Creature) {
             Creature badguy = (Creature)collisionSprite;
             if (canKill) {
+                AudioManager.getInstance().play(AudioManager.SoundType.CREATURE_DEATH);
+                
                 // kill the badguy and make player bounce
                 badguy.setState(Creature.STATE_DYING);
                 player.setY(badguy.getY() - player.getHeight());
@@ -348,7 +347,9 @@ public class GameEngine extends GameCore
                 // player dies!
                 player.setState(Creature.STATE_DYING);
                 numLives--;
-                if(numLives==0) {
+                if (numLives==0) {
+                    AudioManager.getInstance().stopAll();
+                    AudioManager.getInstance().play(AudioManager.SoundType.GAME_OVER);
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException ex) {
@@ -356,13 +357,15 @@ public class GameEngine extends GameCore
                     }
                     stop();
                 }
+                else
+                    AudioManager.getInstance().play(AudioManager.SoundType.PLAYER_DEATH);
             }
         }
     }
     
     
     /**
-     * Gives the player the speicifed power up and removes it
+     * Gives the player the specified power up and removes it
      * from the map.
      */
     public void acquirePowerUp(PowerUp powerUp) {
@@ -371,21 +374,19 @@ public class GameEngine extends GameCore
         
         if (powerUp instanceof PowerUp.Star) {
             // do something here, like give the player points
+            AudioManager.getInstance().play(AudioManager.SoundType.COIN_PICKUP);
             collectedStars++;
-            if(collectedStars==100) 
-            {
+            if(collectedStars==100) {
                 numLives++;
                 collectedStars=0;
             }
-            
         } else if (powerUp instanceof PowerUp.Music) {
-            // change the music
-            
+            AudioManager.getInstance().play(AudioManager.SoundType.STAR_PICKUP);            
         } else if (powerUp instanceof PowerUp.Goal) {
-            // advance to next map      
-      
+            AudioManager.getInstance().play(AudioManager.SoundType.LEVEL_ADVANCE);
+
+            // Advance to next map
             map = mapLoader.loadNextMap();
-            
         }
     }
     

@@ -1,19 +1,17 @@
 package com.TETOSOFT.tilegame.sprites;
 
+import com.TETOSOFT.audio.AudioManager;
 import com.TETOSOFT.graphics.Animation;
 
 /**
     The Player.
 */
-public class Player extends Creature 
-{
-
+public class Player extends Creature {
     private static final float JUMP_SPEED = -.95f;
 
     private boolean onGround;
 
-    public Player(Animation left, Animation right, Animation deadLeft, Animation deadRight)
-    {
+    public Player(Animation left, Animation right, Animation deadLeft, Animation deadRight) {
         super(left, right, deadLeft, deadRight);
     }
 
@@ -52,6 +50,8 @@ public class Player extends Creature
     */
     public void jump(boolean forceJump) {
         if (onGround || forceJump) {
+            if (onGround)
+                AudioManager.getInstance().play(AudioManager.SoundType.PLAYER_JUMP);
             onGround = false;
             setVelocityY(JUMP_SPEED);
         }
