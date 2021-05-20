@@ -3,9 +3,9 @@
                                                                                          o
                                                                                         o o
                         o 1 o     o 2 o                                                o o o
-              1         IBBBJ     IBBBJ       o  o         o1                         o o o o
-             IBJ                        2     IBBJ        IBJ          2   2   2
-                      2     2     2        !     2        2        2              2EBF
+              1         IBBBJ     IBBBJ        o2o        o-1                         o o o o
+             IBJ      2        2        2     IBBBJ       IBJ          2   2   2    -
+                    -       2     2        !     2        2         -             2EBF
                    EBF                   EBF                       EBF            EGAD
-         EBF  1    CAD     1      1   oo CAD    1   1  ooo  1   1  CAD   1  1    EGAAD  1  1   *
+         EBF  1  - CAD  -  1   -  1   oo CAD    1   1  ooo  1   1  CAD   1  1    EGAAD  1  1   *
 BBBBBBBBBGAHBBBBBBBGAHBBBBBBBBBBBBBBBBBBBGAHBBBBBBBBBBBBBBBBBBBBBBBGAHBBBBBBBBBBBGAAAHBBBBBBBBBBBB

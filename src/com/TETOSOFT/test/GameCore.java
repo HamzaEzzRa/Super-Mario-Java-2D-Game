@@ -21,6 +21,26 @@ public abstract class GameCore {
         new DisplayMode(800, 600, 16, 0),
         new DisplayMode(800, 600, 24, 0),
         new DisplayMode(800, 600, 32, 0),
+//        new DisplayMode(1024, 768, 8, 0),
+//        new DisplayMode(1024, 768, 16, 0),
+//        new DisplayMode(1024, 768, 24, 0),
+//        new DisplayMode(1024, 768, 32, 0),
+//        new DisplayMode(1280, 720, 8, 0),
+//        new DisplayMode(1280, 720, 16, 0),
+//        new DisplayMode(1280, 720, 24, 0),
+//        new DisplayMode(1280, 720, 32, 0),
+//        new DisplayMode(1366, 768, 8, 0),
+//        new DisplayMode(1366, 768, 16, 0),
+//        new DisplayMode(1366, 768, 24, 0),
+//        new DisplayMode(1366, 768, 32, 0),
+//        new DisplayMode(1600, 900, 8, 0),
+//        new DisplayMode(1600, 900, 16, 0),
+//        new DisplayMode(1600, 900, 24, 0),
+//        new DisplayMode(1600, 900, 32, 0),
+//        new DisplayMode(1920, 1080, 8, 0),
+//        new DisplayMode(1920, 1080, 16, 0),
+//        new DisplayMode(1920, 1080, 24, 0),
+//        new DisplayMode(1920, 1080, 32, 0)
     };
 
     private boolean isRunning;

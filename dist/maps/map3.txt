@@ -1,12 +1,12 @@
-
-						                        		      EB
-EB                                                                                            CA
-BF          o o o                o o o o o o o o o o o o o o o o o o o o o o o o              CA
-AD         IIIIIII      o 1 o   IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII            CA
-AD        1            IIIIIII               II          o 1 o   IAAAAAAAAAAAAAAAI            CA
-AD       III        2              2         II          IIIII   IAAAAAAAAAAAAAAAII o o o o   CA
-AD                  II       III                                 IAAAAAAAAAAAAAAAII o o o o   CA
-AD     III                              1    1  1       2      * IAAAAAAAAAAAAAAAI  IIIIIII   CA
-AD                   1        1 IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  o o o o o CA
+AD
+AD						                        		      EB
+BF                                                                                            CA
+AD          o o -                o o o o o o o o o o o - o o      o o o o o o o o             CA
+AD         IBBBBBJ      o 1 o   IBBBBBBBBBBBBBBBBBBBBBBBBBBBBJ   EBBBBBBBBBBBBBBF             CA
+AD        1            IBBBBBJ                           o 1 o   CAAAAAAAAAAAAAAD      2      CA
+AD       IBJ        2         -    2      o 2 o          IBBBJ   CAAAAAAAAAAAAAAD 2  o o o  2 CA
+AD                  IBJ      IBJ          IBBBJ                  CAAAAAAAAAAAAAAD     ---     CA
+AD     IBJ                 2       -    1    1  1   -   2      * CAAAAAAAAAAAAAAD    IBBBJ    CA
+AD                   1   -    1 IBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBGAAAAAAAAAAAAAAHJ o o o o o  CA
 AD      1    1  EBBBBBBBBBBBBBBBF o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o CA
 AHBBBBBBBBBBBBBBGAAAAAAAAAAAAAAAHBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBGA

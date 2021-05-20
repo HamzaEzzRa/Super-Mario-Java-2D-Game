@@ -20,15 +20,19 @@ import com.TETOSOFT.tilegame.sprites.Creature;
 
     <p>This TileMapRender uses a tile size of 64.
 */
-public class TileMapDrawer 
-{
-
+public class TileMapDrawer {
     private static final int TILE_SIZE = 64;
     // the size in bits of the tile
     // Math.pow(2, TILE_SIZE_BITS) == TILE_SIZE
     private static final int TILE_SIZE_BITS = 6;
 
-    private Image background;
+    private Image[] backgrounds;
+    private int[] backgroundStartPositions;
+    private float[] backgroundParallaxFactors;
+    
+    private Image[] foregrounds;
+    private int[] foregroundStartPositions;
+    private float[] foregroundParallaxFactors;
 
     /**
         Converts a pixel position to a tile position.
@@ -36,7 +40,6 @@ public class TileMapDrawer
     public static int pixelsToTiles(float pixels) {
         return pixelsToTiles(Math.round(pixels));
     }
-
 
     /**
         Converts a pixel position to a tile position.
@@ -49,7 +52,6 @@ public class TileMapDrawer
         // use the floor function:
         //return (int)Math.floor((float)pixels / TILE_SIZE);
     }
-
 
     /**
         Converts a tile position to a pixel position.
@@ -64,21 +66,125 @@ public class TileMapDrawer
         //return numTiles * TILE_SIZE;
     }
 
-
     /**
-        Sets the background to draw.
+        Sets the backgrounds to draw.
     */
-    public void setBackground(Image background) {
-        this.background = background;
+    public void setBackgrounds(Image[] backgrounds) {
+        if (backgrounds == null)
+            return;
+        
+        this.backgrounds = backgrounds;
+        
+        this.backgroundStartPositions = new int[backgrounds.length];
+        for (int i = 0; i < backgrounds.length; i++)
+            this.backgroundStartPositions[i] = 0;
+    }
+    
+    /**
+        Sets the foregrounds to draw.
+    */
+    public void setForegrounds(Image[] foregrounds) {
+        if (foregrounds == null)
+            return;
+        
+        this.foregrounds = foregrounds;
+        
+        this.foregroundStartPositions = new int[foregrounds.length];
+        for (int i = 0; i < foregrounds.length; i++)
+            this.foregroundStartPositions[i] = 0;
+    }
+    
+    /**
+     * Sets a list of parallax factor, one for each background image.
+     */
+    public void setBackgroundParallaxFactors(float[] parallaxFactors) {
+        if (backgrounds == null)
+            return;
+        
+        this.backgroundParallaxFactors = new float[backgrounds.length];
+        for (int i = 0; i < backgrounds.length; i++)
+            this.backgroundParallaxFactors[i] = 1f;
+        
+        System.arraycopy(parallaxFactors, 0, this.backgroundParallaxFactors, 0, parallaxFactors.length);
+    }
+    
+    /**
+     * Sets a list of parallax factor, one for each foreground image.
+     */
+    public void setForegroundParallaxFactors(float[] parallaxFactors) {
+        if (foregrounds == null)
+            return;
+        
+        this.foregroundParallaxFactors = new float[foregrounds.length];
+        for (int i = 0; i < foregrounds.length; i++)
+            this.foregroundParallaxFactors[i] = 1f;
+        
+        System.arraycopy(parallaxFactors, 0, this.foregroundParallaxFactors, 0, parallaxFactors.length);
+    }
+    
+    /**
+     * Resets start position to zero for all background / foreground images.
+     */
+    public void resetStartPositions() {
+        if (backgrounds != null) {
+            for (int i = 0; i < backgrounds.length; i++)
+                this.backgroundStartPositions[i] = 0;
+        }
+        
+        if (foregrounds != null) {
+            for (int i = 0; i < foregrounds.length; i++)
+                this.foregroundStartPositions[i] = 0;
+        }
     }
 
+    /**
+     * Apply parallax effect to the image with infinite scrolling
+     * @param g
+     * @param index
+     * @param screenWidth
+     * @param screenHeight
+     * @param offsetX
+     * @param mapWidth 
+     */
+    private void applyBackgroundParallax(Graphics2D g, int index, int screenWidth, int screenHeight,
+        int offsetX, int mapWidth) {
+        int temp = ((int)(offsetX * backgroundParallaxFactors[index])) *
+            (screenWidth - backgrounds[index].getWidth(null)) /
+            (screenWidth - mapWidth);
+        if (temp > backgroundStartPositions[index] + backgrounds[index].getWidth(null))
+            backgroundStartPositions[index] += backgrounds[index].getWidth(null);
+        if (temp - screenWidth < backgroundStartPositions[index] - backgrounds[index].getWidth(null))
+            backgroundStartPositions[index] -= backgrounds[index].getWidth(null);
 
+        int x = temp - backgroundStartPositions[index];
+        int y = screenHeight - backgrounds[index].getHeight(null);
+
+        g.drawImage(backgrounds[index], x - backgrounds[index].getWidth(null), y, null);
+        g.drawImage(backgrounds[index], x, y, null);
+    }
+    
+    private void applyForegroundParallax(Graphics2D g, int index, int screenWidth, int screenHeight,
+        int offsetX, int mapWidth) {
+        int temp = ((int)(offsetX * foregroundParallaxFactors[index])) *
+            (screenWidth - foregrounds[index].getWidth(null)) /
+            (screenWidth - mapWidth);
+        if (temp > foregroundStartPositions[index] + foregrounds[index].getWidth(null))
+            foregroundStartPositions[index] += foregrounds[index].getWidth(null);
+        if (temp - screenWidth < foregroundStartPositions[index] - foregrounds[index].getWidth(null))
+            foregroundStartPositions[index] -= foregrounds[index].getWidth(null);
+
+        int x = temp - foregroundStartPositions[index];
+        int y = screenHeight - foregrounds[index].getHeight(null);
+
+        g.drawImage(foregrounds[index], x - foregrounds[index].getWidth(null), y, null);
+        g.drawImage(foregrounds[index], x, y, null);
+    }
+    
     /**
         Draws the specified TileMap.
     */
     public void draw(Graphics2D g, TileMap map,
-        int screenWidth, int screenHeight)
-    {
+        int screenWidth, int screenHeight) {
         Sprite player = map.getPlayer();
         int mapWidth = tilesToPixels(map.getWidth());
 
@@ -94,28 +200,21 @@ public class TileMapDrawer
             tilesToPixels(map.getHeight());
 
         // draw black background, if needed
-        if (background == null ||
-            screenHeight > background.getHeight(null))
-        {
+        if (backgrounds == null || backgrounds.length == 0 ||
+            screenHeight > backgrounds[0].getHeight(null)) {
             g.setColor(Color.black);
             g.fillRect(0, 0, screenWidth, screenHeight);
         }
 
-        // draw parallax background image
-        if (background != null) {
-            int x = offsetX *
-                (screenWidth - background.getWidth(null)) /
-                (screenWidth - mapWidth);
-            int y = screenHeight - background.getHeight(null);
-
-            g.drawImage(background, x, y, null);
-        
+        // draw parallax background images
+        if (backgrounds != null) {
+            for (int i = 0; i < backgrounds.length; i++)
+                applyBackgroundParallax(g, i, screenWidth, screenHeight, offsetX, mapWidth);
         }
 
         // draw the visible tiles
         int firstTileX = pixelsToTiles(-offsetX);
-        int lastTileX = firstTileX +
-            pixelsToTiles(screenWidth) + 1;
+        int lastTileX = firstTileX + pixelsToTiles(screenWidth) + 1;
         for (int y=0; y<map.getHeight(); y++) {
             for (int x=firstTileX; x <= lastTileX; x++) {
                 Image image = map.getTile(x, y);
@@ -149,6 +248,11 @@ public class TileMapDrawer
                 ((Creature)sprite).wakeUp();
             }
         }
+        
+        // draw parallax foreground images
+        if (foregrounds != null) {
+            for (int j = 0; j < foregrounds.length; j++)
+                applyForegroundParallax(g, j, screenWidth, screenHeight, offsetX, mapWidth);
+        }
     }
-
 }

@@ -42,8 +42,7 @@ public class ScreenManager
         return device.getDisplayMode();
     }
 
-    public boolean displayModesMatch(DisplayMode mode1,DisplayMode mode2)
-    {
+    public boolean displayModesMatch(DisplayMode mode1, DisplayMode mode2) {   
         if (mode1.getWidth() != mode2.getWidth() || mode1.getHeight() != mode2.getHeight())
         {
             return false;

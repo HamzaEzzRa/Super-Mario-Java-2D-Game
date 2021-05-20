@@ -3,10 +3,7 @@ package com.TETOSOFT.input;
 
 public class GameAction 
 {
-
-   
     public static final int NORMAL = 0;
-
    
     public static final int DETECT_INITAL_PRESS_ONLY = 1;
 
@@ -18,13 +15,11 @@ public class GameAction
     private int behavior;
     private int amount;
     private int state;
-
     
     public GameAction(String name) 
     {
         this(name, NORMAL);
     }
-
 
     public GameAction(String name, int behavior) 
     {
@@ -33,20 +28,16 @@ public class GameAction
         reset();
     }
 
-
     public String getName() 
     {
         return name;
     }
-
 
     public void reset() 
     {
         state = STATE_RELEASED;
         amount = 0;
     }
-
-
    
     public synchronized void tap() 
     {
@@ -54,14 +45,11 @@ public class GameAction
         release();
     }
 
-
     public synchronized void press() 
     {
         press(1);
     }
 
-
-    
     public synchronized void press(int amount) 
     {
         if (state != STATE_WAITING_FOR_RELEASE) 
@@ -72,18 +60,15 @@ public class GameAction
 
     }
 
-
     public synchronized void release() 
     {
         state = STATE_RELEASED;
     }
 
-
     public synchronized boolean isPressed() 
     {
         return (getAmount() != 0);
     }
-
 
     public synchronized int getAmount() 
     {

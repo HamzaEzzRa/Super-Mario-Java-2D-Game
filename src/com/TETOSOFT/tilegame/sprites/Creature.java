@@ -9,7 +9,6 @@ import com.TETOSOFT.graphics.*;
     dying on the left, and dying on the right.
 */
 public abstract class Creature extends Sprite {
-
     /**
         Amount of time to go from STATE_DYING to STATE_DEAD.
     */
@@ -19,19 +18,20 @@ public abstract class Creature extends Sprite {
     public static final int STATE_DYING = 1;
     public static final int STATE_DEAD = 2;
 
-    private Animation left;
-    private Animation right;
-    private Animation deadLeft;
-    private Animation deadRight;
-    private int state;
-    private long stateTime;
+    protected Animation left;
+    protected Animation right;
+    protected Animation deadLeft;
+    protected Animation deadRight;
+    protected int state;
+    protected long stateTime;
+    
+    private boolean killable = true;
 
     /**
         Creates a new Creature with the specified Animations.
     */
     public Creature(Animation left, Animation right,
-        Animation deadLeft, Animation deadRight)
-    {
+        Animation deadLeft, Animation deadRight) {
         super(right);
         this.left = left;
         this.right = right;
@@ -39,7 +39,17 @@ public abstract class Creature extends Sprite {
         this.deadRight = deadRight;
         state = STATE_NORMAL;
     }
-
+    
+    public Creature(Animation left, Animation right,
+        Animation deadLeft, Animation deadRight, boolean killable) {
+        super(right);
+        this.left = left;
+        this.right = right;
+        this.deadLeft = deadLeft;
+        this.deadRight = deadRight;
+        this.killable = killable;
+        state = STATE_NORMAL;
+    }
 
     public Object clone() {
         // use reflection to create the correct subclass
@@ -59,14 +69,12 @@ public abstract class Creature extends Sprite {
         }
     }
 
-
     /**
         Gets the maximum speed of this Creature.
     */
     public float getMaxSpeed() {
         return 0;
     }
-
 
     /**
         Wakes up the creature when the Creature first appears
@@ -78,7 +86,6 @@ public abstract class Creature extends Sprite {
         }
     }
 
-
     /**
         Gets the state of this Creature. The state is either
         STATE_NORMAL, STATE_DYING, or STATE_DEAD.
@@ -86,7 +93,6 @@ public abstract class Creature extends Sprite {
     public int getState() {
         return state;
     }
-
 
     /**
         Sets the state of this Creature to STATE_NORMAL,
@@ -103,7 +109,6 @@ public abstract class Creature extends Sprite {
         }
     }
 
-
     /**
         Checks if this creature is alive.
     */
@@ -111,14 +116,12 @@ public abstract class Creature extends Sprite {
         return (state == STATE_NORMAL);
     }
 
-
     /**
         Checks if this creature is flying.
     */
     public boolean isFlying() {
         return false;
     }
-
 
     /**
         Called before update() if the creature collided with a
@@ -128,7 +131,6 @@ public abstract class Creature extends Sprite {
         setVelocityX(-getVelocityX());
     }
 
-
     /**
         Called before update() if the creature collided with a
         tile vertically.
@@ -137,9 +139,8 @@ public abstract class Creature extends Sprite {
         setVelocityY(0);
     }
 
-
     /**
-        Updates the animaton for this creature.
+        Updates the animation for this creature.
     */
     public void update(long elapsedTime) {
         // select the correct Animation
@@ -172,5 +173,8 @@ public abstract class Creature extends Sprite {
             setState(STATE_DEAD);
         }
     }
-
+    
+    public boolean isKillable() {
+        return killable;
+    }
 }

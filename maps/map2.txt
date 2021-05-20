@@ -2,11 +2,11 @@
 BF          o o o                                                                             EB
 AD         IBBBBBJ              IBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBJ        o o    CA
 AD                      o 1 o                                    EBBBBBBBBBBBBBF     o o o o  CA
-AD                     IBBBBBJ         oo     oo                 CAAAAAAAAAAAAAD    2 o ! o 2 CA
-AD                                     IBJ   IBJ          o  o   CAAAAAAAAAAAAAHF    2 o o 2  CA
-AD                    2   1 o      2               2      IBBJ   CAAAAAAAAAAAAAAD   2 1 o 1 2 CA
-AD          o            IBBBJ                                   CAAAAAAAAAAAAAAHF   IBBBBBJ  CA
-AD         IBJ                        1    2    1        2       CAAAAAAAAAAAAAAAD  o 2 o 2 o CA
-AD                 1    o o   1      IBBBBBBBBBBBJ               CAAAAAAAAAAAAAAAHF  2 o o 2  CA
-AD      1       EBBBBBBBBBBBBBBBF     o o o o o o    1        *  CAAAAAAAAAAAAAAAAD o 1 o 1 o CA
+AD                     IBBBBBJ         o-o   o-o                 CAAAAAAAAAAAAAD    2 o ! o 2 CA
+AD                                     IBJ   IBJ         o - o   CAAAAAAAAAAAAAHF    2 o o 2  CA
+AD                    2   1 o      2               2     IBBBJ   CAAAAAAAAAAAAAAD   2 1 o 1 2 CA
+AD          o            IBBBJ              2                    CAAAAAAAAAAAAAAHF   IBBBBBJ  CA
+AD         IBJ                         - 1    - 1        2       CAAAAAAAAAAAAAAAD  o 2 o 2 o CA
+AD                 1  - o o   1      IBBBBBBBBBBBJ               CAAAAAAAAAAAAAAAHF  2 o o 2  CA
+AD      1       EBBBBBBBBBBBBBBBF    o o o o o o 2    1   ---*-- CAAAAAAAAAAAAAAAAD o 1 - 1 o CA
 AHBBBBBBBBBBBBBBGAAAAAAAAAAAAAAAHBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBGAAAAAAAAAAAAAAAAHBBBBBBBBBBBGA
