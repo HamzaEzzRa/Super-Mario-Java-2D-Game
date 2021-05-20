@@ -54,8 +54,8 @@ public class Menu extends JFrame {
             public void mouseClicked(MouseEvent arg0) {
                 new Thread(() -> {
                     game.run();
+                    System.exit(0);
                 }).start();
-                System.exit(0);
             }
         });
         JLabel btnQuit = new JLabel("");
