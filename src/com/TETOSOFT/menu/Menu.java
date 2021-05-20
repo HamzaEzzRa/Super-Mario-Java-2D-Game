@@ -15,7 +15,7 @@ public class Menu extends JFrame {
     private int width;
     private int height;
     private GameEngine game;
-
+    
     /**
      * Launch the application.
      * @throws InterruptedException
@@ -25,7 +25,7 @@ public class Menu extends JFrame {
         Menu window = new Menu(800, 600);
         window.setVisible(true);
     }
-    
+
     /**
      * Create the application.
      */
@@ -40,9 +40,11 @@ public class Menu extends JFrame {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        this.setBounds(0, 0, width, height);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getContentPane().setLayout(null);
+        setBounds(0, 0, width, height);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        setLocationRelativeTo(null);
+        setResizable(false);
 
         JLabel back = new JLabel("");
         JLabel btnPlay = new JLabel("n");
@@ -50,13 +52,10 @@ public class Menu extends JFrame {
         btnPlay.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.run();
-                        System.exit(0);
-                    }
+                new Thread(() -> {
+                    game.run();
                 }).start();
+                System.exit(0);
             }
         });
         JLabel btnQuit = new JLabel("");
