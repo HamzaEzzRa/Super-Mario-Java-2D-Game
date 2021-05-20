@@ -1,4 +1,4 @@
-# About
+# About the project
 This is a Super Mario 2D Clone written in java.
 
 Originally forked from [Super-Mario-Java-2D-Game](https://github.com/mtala3t/Super-Mario-Java-2D-Game).
