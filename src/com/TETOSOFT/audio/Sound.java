@@ -65,6 +65,10 @@ public class Sound {
         return loops;
     }
     
+    public String getName() {
+        return name;
+    }
+    
     private synchronized void load(String name) {
         dispose();
         this.name = name;
@@ -172,9 +176,9 @@ public class Sound {
         return ready;
     }
     
-    public void play() {
+    public boolean play() {
         if (paused)
-            return;
+            return false;
         playing = true;
 
         try {
@@ -188,6 +192,8 @@ public class Sound {
         loadData();
         line.start();
         ready = true;
+        
+        return true;
     }
 
     public void stop() {
@@ -199,11 +205,11 @@ public class Sound {
       }
     }
 
-    public void outputSound() {
+    public boolean outputSound() {
         int stored;
         int temp;
         if (!playing || paused)
-            return;
+            return false;
         if (finished)
             playing = false;
         else {
@@ -215,12 +221,12 @@ public class Sound {
                     temp -= BUFFER_SIZE;
                     loadData();
                     if (finished)
-                        return;
+                        return true;
                     line.write(buffer, 0, BUFFER_SIZE);
                 }
                 loadData();
                 if (finished)
-                    return;
+                    return true;
                 line.write(buffer, 0, temp);
                 pos = temp;
             }
@@ -231,6 +237,8 @@ public class Sound {
             if (pos >= BUFFER_SIZE)
                 loadData();
         }
+        
+        return true;
     }
     
     private AudioFormat getOutFormat(AudioFormat inFormat) {

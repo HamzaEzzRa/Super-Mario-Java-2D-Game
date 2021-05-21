@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.TETOSOFT.audio;
 
-/**
- *
- * @author Y540
- */
 public class AudioManager {
     public enum SoundType {
         BG_MUSIC(0),
@@ -60,18 +51,21 @@ public class AudioManager {
     }
     
     public void play(SoundType type) {
-        new Thread(() -> {
-            Sound selectedSound = sounds[type.getValue()];
-            if (selectedSound.isPlaying())
-                return;
-            
-            selectedSound.play();
-            
-            while (selectedSound.isPlaying())
-                selectedSound.outputSound();
-            
-            selectedSound.reload();
-        }).start();
+        new Thread() {
+            @Override
+            public void run() {
+                Sound selectedSound = sounds[type.getValue()];
+                if (selectedSound.isPlaying())
+                    return;
+
+                selectedSound.play();
+
+                while (selectedSound.isPlaying())
+                    selectedSound.outputSound();
+
+                selectedSound.reload();
+            }
+        }.start();
     }
     
     public void stop(SoundType type) {

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
-
 public class InputManager implements KeyListener, MouseListener,
     MouseMotionListener, MouseWheelListener {
     public static final Cursor INVISIBLE_CURSOR = Toolkit.getDefaultToolkit()
