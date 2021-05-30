@@ -15,7 +15,7 @@ import com.TETOSOFT.graphics.Sprite;
 public class TileMap {
 
     private Image[][] tiles;
-    private LinkedList sprites;
+    private LinkedList<Sprite> sprites;
     private Sprite player;
 
     /**
@@ -24,7 +24,7 @@ public class TileMap {
     */
     public TileMap(int width, int height) {
         tiles = new Image[width][height];
-        sprites = new LinkedList();
+        sprites = new LinkedList<>();
     }
 
 

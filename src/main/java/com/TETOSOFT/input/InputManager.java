@@ -106,7 +106,7 @@ public class InputManager implements KeyListener, MouseListener,
     }
 
     public List getMaps(GameAction gameCode) {
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<>();
 
         for (int i=0; i<keyActions.length; i++) {
             if (keyActions[i] == gameCode) {
