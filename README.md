@@ -1,3 +1,5 @@
+![](https://github.com/HamzaEzzRa/Super-Mario-Java-2D-Game/workflows/tests/badge.svg)
+
 # About
 This is a Super Mario 2D Clone written in java.
 
